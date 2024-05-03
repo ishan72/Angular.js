@@ -1,0 +1,17 @@
+<app-add-task (onAddTask)="addTask($event)"></app-add-task>
+<ul>
+  @for (item of task; track $index){
+  <li (click)="onDoubleClick(item)" [ngClass]="{ reminder: item.reminder }">
+    <div>
+      {{ item.text }}
+    </div>
+    <fa-icon
+      [ngStyle]="{ color: 'red' }"
+      [icon]="faTimes"
+      (click)="onDeleteClick(item)"
+    ></fa-icon>
+  </li>
+  } @empty {
+  <li>No task available.</li>
+  }
+</ul>
