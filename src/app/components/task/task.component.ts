@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Task } from '../../TaskInterface';
 import { TaskService } from '../../services/task.service';
 import { CommonModule, NgClass, NgStyle } from '@angular/common';
@@ -35,7 +35,11 @@ export class TaskComponent {
   onDeleteClick(task: Task) {
     this.taskService.deleteTasks(task).subscribe(() => this.getServerTask());
   }
-  onDoubleClick(task: Task) {
+
+  @HostListener('dblclick', ['$event'])
+  onDoubleClick(event: MouseEvent, task: Task) {
+    event.preventDefault();
+    event.stopPropagation();
     task.reminder = !task.reminder;
     this.taskService
       .onToggleReminder(task)

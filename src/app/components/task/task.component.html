@@ -1,7 +1,10 @@
 <app-add-task (onAddTask)="addTask($event)"></app-add-task>
 <ul>
   @for (item of task; track $index){
-  <li (click)="onDoubleClick(item)" [ngClass]="{ reminder: item.reminder }">
+  <li
+    (dblclick)="onDoubleClick($event, item)"
+    [ngClass]="{ reminder: item.reminder }"
+  >
     <div>
       {{ item.text }}
     </div>
